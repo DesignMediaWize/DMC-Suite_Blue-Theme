@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { ChatMessage, PlaceDetails } from '../types';
 import { Loader2, Bot, Plus, Mic, ArrowRight, MapPin, Briefcase, Map, Sparkles, Compass } from 'lucide-react';
@@ -42,43 +43,47 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     setInput('');
   };
 
+  // -- LANDING PAGE LAYOUT (70/30 Split) --
   const LandingPageSplit = () => (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full font-sans">
         
         {/* LEFT PANEL (70%) - Hero & Input */}
-        <div className="flex-1 relative flex flex-col bg-white">
+        <div className="flex-1 relative flex flex-col bg-white overflow-hidden">
             
-            {/* Header Actions (Top Right of Left Panel) */}
-            <div className="absolute top-6 right-6 z-10">
+            {/* Header Actions */}
+            <div className="absolute top-6 right-6 z-10 hidden md:block">
                 <button 
                   onClick={onCreateTrip} 
-                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-full hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl"
                 >
                   <Briefcase size={14} />
                   <span>Create a trip</span>
                 </button>
             </div>
 
-            {/* Hero Content - Centered */}
-            <div className="flex-1 flex flex-col items-center justify-center p-12 pb-32 text-center">
-                 {/* 3D Collage */}
-                 <div className="relative w-72 h-72 mb-10 group">
-                    <img 
+            {/* Hero Content */}
+            <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-12 pb-32 text-center">
+                 <div className="relative w-64 h-64 md:w-72 md:h-72 mb-10 group">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-60 bg-white p-1.5 rounded-2xl shadow-2xl rotate-[-6deg] z-10 transition-transform duration-700 group-hover:rotate-[-8deg] group-hover:scale-105">
+                       <img 
                         src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=400" 
-                        className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-60 object-cover rounded-2xl shadow-2xl rotate-[-6deg] z-10 border-4 border-white transition-transform duration-700 group-hover:rotate-[-8deg] group-hover:scale-105"
+                        className="w-full h-full object-cover rounded-xl"
                         alt="Travel 1"
-                    />
-                    <img 
+                       />
+                    </div>
+                    <div className="absolute top-12 left-1/2 -translate-x-[15%] w-40 h-40 bg-white p-1.5 rounded-full shadow-xl z-20 transition-transform duration-700 group-hover:rotate-[5deg] group-hover:scale-105">
+                       <img 
                         src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=400" 
-                        className="absolute top-12 left-1/2 -translate-x-[15%] w-40 h-40 object-cover rounded-full shadow-xl z-20 border-4 border-white transition-transform duration-700 group-hover:rotate-[5deg] group-hover:scale-105"
+                        className="w-full h-full object-cover rounded-full"
                         alt="Travel 2"
-                    />
-                    <div className="absolute -top-4 right-8 bg-white/80 backdrop-blur-sm p-2 rounded-xl shadow-lg animate-bounce duration-[3s]">
+                       />
+                    </div>
+                    <div className="absolute -top-4 right-8 bg-white p-2 rounded-xl shadow-lg animate-bounce duration-[3s] z-30">
                         <MapPin className="text-rose-500 fill-current" size={24} />
                     </div>
                  </div>
 
-                 <h1 className="text-5xl font-extrabold text-slate-900 mb-6 tracking-tight drop-shadow-sm">
+                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight font-serif">
                     Where to today?
                  </h1>
                  <p className="text-slate-500 text-lg max-w-md leading-relaxed font-medium">
@@ -86,10 +91,9 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                  </p>
             </div>
 
-            {/* Input Bar - Anchored to Bottom of Left Panel */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
+            {/* Input Bar */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-20">
                 <div className="max-w-2xl mx-auto">
-                     {/* Helper Pill */}
                      <div className="flex justify-center mb-4">
                          <button className="px-5 py-2 bg-white border border-gray-100 text-xs font-bold text-slate-600 rounded-full hover:bg-gray-50 transition-all shadow-sm hover:shadow-md">
                             What can I ask DMC Suite?
@@ -142,30 +146,26 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         </div>
 
         {/* RIGHT PANEL (30%) - Suggestions */}
-        <div className="w-[400px] bg-gray-50 border-l border-gray-200 h-full overflow-y-auto hidden xl:block">
+        <div className="w-[400px] bg-gray-50 border-l border-gray-100 h-full overflow-y-auto hidden xl:block">
             <div className="p-8 space-y-10">
                 
                 {/* Section 1: For You */}
                 <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                            For you in <span className="underline decoration-slate-300 decoration-dotted underline-offset-4">Rinkeby-Kista</span>
-                        </h3>
-                    </div>
+                    <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                        For you in <span className="underline decoration-slate-300 decoration-dotted underline-offset-4">Rinkeby-Kista</span>
+                    </h3>
                     
                     <div className="space-y-3">
-                        {/* Card 1 */}
-                        <div className="h-40 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                        <div className="h-40 rounded-xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                             <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Hotel" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                            <div className="absolute top-3 left-3 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md border border-white/20">Nov 28</div>
+                            <div className="absolute top-3 left-3 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded border border-white/20">Nov 28</div>
                             <div className="absolute bottom-3 left-3 right-3 text-white">
                                 <h4 className="font-bold text-sm leading-tight mb-0.5">Stallmästaregården</h4>
                                 <div className="flex items-center gap-1 text-[10px] opacity-90"><Briefcase size={10} /> Hotel</div>
                             </div>
                         </div>
-                         {/* Card 2 */}
-                         <div className="h-40 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                         <div className="h-40 rounded-xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                             <img src="https://images.unsplash.com/photo-1590073242678-cfe4f25c65f5?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Hotel" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                             <div className="absolute bottom-3 left-3 right-3 text-white">
@@ -180,12 +180,12 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 <div className="space-y-4">
                     <h3 className="font-bold text-slate-900 text-sm">Get started</h3>
                     <div className="grid grid-cols-2 gap-3">
-                        <div className="aspect-square rounded-2xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                        <div className="aspect-square rounded-xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                             <img src="https://images.unsplash.com/photo-1565538563729-2df807e324c4?auto=format&fit=crop&q=80&w=300" className="w-full h-full object-cover" alt="Quiz" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <div className="absolute bottom-3 left-3 right-3 text-white font-bold text-xs leading-tight">Take our travel quiz</div>
                         </div>
-                        <div className="aspect-square rounded-2xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                        <div className="aspect-square rounded-xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                              <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=80&w=300" className="w-full h-full object-cover" alt="Tools" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <div className="absolute bottom-3 left-3 right-3 text-white font-bold text-xs leading-tight">Creator tools</div>
@@ -200,7 +200,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                         <button className="text-xs font-bold text-slate-400 hover:text-slate-900">See all</button>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                        <div className="aspect-[4/5] rounded-2xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                        <div className="aspect-[4/5] rounded-xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                             <img src="https://images.unsplash.com/photo-1506377295352-e3154d43ea9e?auto=format&fit=crop&q=80&w=300" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Skye" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                             <div className="absolute top-2 left-2 w-6 h-6 rounded-full border border-white overflow-hidden">
@@ -208,7 +208,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                             </div>
                             <div className="absolute bottom-3 left-3 right-3 text-white font-bold text-xs leading-tight">Isle of Skye Road Trip</div>
                         </div>
-                        <div className="aspect-[4/5] rounded-2xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                        <div className="aspect-[4/5] rounded-xl relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=300" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Paris" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                             <div className="absolute top-2 left-2 w-6 h-6 rounded-full border border-white overflow-hidden">
@@ -231,14 +231,14 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       {hasUserMessages && (
           <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-white/95 backdrop-blur-sm sticky top-0 z-20">
              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white shadow-md">
+                <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white shadow-md">
                     <Bot size={16} />
                 </div>
-                <h2 className="font-bold text-gray-900">DMC Assistant</h2>
+                <h2 className="font-bold text-gray-900 font-serif">DMC Assistant</h2>
              </div>
              <button 
                 onClick={onCreateTrip} 
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-slate-900 text-xs font-bold rounded-full hover:bg-gray-50 transition-all shadow-sm"
+                className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition-all shadow-sm"
               >
                 <Briefcase size={14} />
                 <span>Create a trip</span>
@@ -261,7 +261,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                         {msg.role === 'model' && (
                              <div className="flex items-center gap-2 mb-2 px-2">
                                 <Bot size={16} className="text-teal-600" />
-                                <span className="text-xs font-bold text-gray-500">Mindtrip</span>
+                                <span className="text-xs font-bold text-gray-500">DMC Suite</span>
                              </div>
                         )}
 
@@ -321,7 +321,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         )}
       </div>
 
-      {/* Floating Input Area - ONLY for Active Chat Mode (Landing Page has its own) */}
+      {/* Floating Input Area - ONLY for Active Chat Mode */}
       {hasUserMessages && (
           <div className="fixed bottom-0 left-0 md:left-[280px] right-0 p-6 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-30">
              <div className="max-w-3xl mx-auto pointer-events-auto">

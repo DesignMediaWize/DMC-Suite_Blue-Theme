@@ -9,14 +9,13 @@ import {
   Compass, 
   PlusSquare, 
   ChevronLeft, 
-  Sparkles,
+  Crown,
   User,
   MoreHorizontal,
   Menu,
   X,
   ChevronRight,
-  ShieldCheck,
-  Crown
+  Sparkles
 } from 'lucide-react';
 import { Page } from '../types';
 import { UpdatesDrawer } from './UpdatesDrawer';
@@ -81,169 +80,149 @@ export const Layout: React.FC<LayoutProps> = ({
   };
 
   return (
-    <div className="flex h-full w-full bg-gray-50 text-midnight font-sans">
+    <div className="flex h-full w-full bg-slate-900 text-slate-200 font-sans">
       
       {/* Mobile Menu Button */}
       <div className="md:hidden fixed top-4 left-4 z-50">
         <button 
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="p-2 bg-midnight text-white rounded-lg shadow-md border border-gray-700"
+          className="p-2 bg-slate-900 rounded-full shadow-md border border-slate-700 text-white"
         >
           {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Sidebar Navigation - MIDNIGHT THEME */}
+      {/* Sidebar Navigation */}
       <aside 
         className={`
-          fixed md:relative z-50 h-full w-[280px] bg-midnight border-r border-gray-800 flex flex-col transition-transform duration-300 ease-in-out text-gray-300
+          fixed md:relative z-50 h-full w-[280px] bg-slate-900 border-r border-slate-800 flex flex-col transition-transform duration-300 ease-in-out
           ${isMobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'}
         `}
       >
         {/* Header / Logo */}
         <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => handleNav('chat')}>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-midnight shadow-glow">
-              <Crown size={18} strokeWidth={2.5} />
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleNav('chat')}>
+            <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-slate-900 shadow-glow">
+                <Crown size={20} strokeWidth={2.5} fill="currentColor" className="text-slate-900" />
             </div>
-            <span className="text-lg font-bold tracking-wide text-white font-serif">DMC Suite</span>
+            <span className="text-xl font-bold tracking-tight text-white font-serif">DMC Suite</span>
           </div>
         </div>
 
         {/* Scrollable Nav Content */}
-        <div className="flex-1 overflow-y-auto px-4 space-y-8">
+        <div className="flex-1 overflow-y-auto px-3 space-y-6">
           
           {/* Main Links */}
-          <nav className="space-y-1.5">
+          <nav className="space-y-1">
             <NavItem 
-              icon={<MessageCircle size={18} />} 
+              icon={<MessageCircle size={20} />} 
               label="Chats" 
               badge="1" 
               active={(activePage === 'chat' && !isUpdatesOpen) || isChatsOpen} 
               onClick={() => handleNav('chat')}
             />
             <NavItem 
-              icon={<Search size={18} />} 
+              icon={<Search size={20} />} 
               label="Explore" 
               active={activePage === 'explore' && !isUpdatesOpen && !isChatsOpen}
               onClick={() => handleNav('explore')}
             />
             <NavItem 
-              icon={<Heart size={18} />} 
+              icon={<Heart size={20} />} 
               label="Saved" 
               active={activePage === 'saved' && !isUpdatesOpen && !isChatsOpen}
               onClick={() => handleNav('saved')}
             />
             <NavItem 
-              icon={<Briefcase size={18} />} 
+              icon={<Briefcase size={20} />} 
               label="Itineraries" 
               active={activePage === 'trips' && !isUpdatesOpen && !isChatsOpen}
               onClick={() => handleNav('trips')}
             />
             <NavItem 
-              icon={<Bell size={18} />} 
+              icon={<Bell size={20} />} 
               label="Updates" 
               active={isUpdatesOpen}
               onClick={() => handleNav('updates')}
             />
             <NavItem 
-              icon={<Compass size={18} />} 
+              icon={<Compass size={20} />} 
               label="Inspiration" 
               active={activePage === 'inspiration' && !isUpdatesOpen && !isChatsOpen}
               onClick={() => handleNav('inspiration')}
             />
             <NavItem 
-              icon={<PlusSquare size={18} />} 
+              icon={<PlusSquare size={20} />} 
               label="Create" 
               active={activePage === 'create' && !isUpdatesOpen && !isChatsOpen}
               onClick={() => handleNav('create')}
             />
           </nav>
 
-          {/* New Chat CTA */}
-          <div>
+          {/* New Request CTA */}
+          <div className="px-1">
             <button 
               onClick={() => {
                 onNewChat();
                 if (isChatsOpen) onToggleChats();
                 onNavigate('chat');
               }}
-              className="w-full py-3 px-4 bg-gray-800 hover:bg-gray-700 text-white border border-gray-700 font-medium rounded-lg transition-all active:scale-95 flex items-center justify-center gap-2 group"
+              className="w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-amber-400 font-semibold rounded-lg transition-all active:scale-95 flex items-center justify-center gap-2 group"
             >
-              <Sparkles size={16} className="text-gold-500 group-hover:text-gold-400" />
-              <span>New Request</span>
+              <Sparkles size={16} className="group-hover:animate-pulse" />
+              New Request
             </button>
           </div>
 
-          {/* Promo Card - "Enterprise Status" */}
-          <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 p-5 mt-auto">
-             <div className="flex items-center gap-2 mb-2">
-                <ShieldCheck className="text-gold-500" size={18} />
-                <span className="text-xs font-bold text-gold-500 uppercase tracking-widest">Enterprise</span>
+          {/* Enterprise Promo Card */}
+          <div className="relative overflow-hidden rounded-xl bg-slate-800/50 border border-slate-700 p-4 mt-auto mx-1">
+             <div className="flex items-center gap-2 mb-2 text-amber-500">
+                <Briefcase size={14} />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Enterprise</span>
              </div>
              <h3 className="font-bold text-white text-sm mb-1">Platinum Partner</h3>
-             <p className="text-[10px] text-gray-400 font-medium leading-relaxed mb-3">
+             <p className="text-[11px] text-slate-400 leading-relaxed mb-3">
                Full access to API, white-label exports, and 24/7 priority support.
              </p>
-             <button className="text-[10px] font-bold text-white bg-white/10 px-3 py-1.5 rounded hover:bg-white/20 transition-colors">
+             <button className="text-[10px] font-bold bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-md transition-colors">
                Manage Plan
              </button>
           </div>
         </div>
 
         {/* Footer / Profile */}
-        <div className="p-4 mt-auto border-t border-gray-800" ref={profileMenuRef}>
+        <div className="p-4 mt-auto border-t border-slate-800" ref={profileMenuRef}>
           {/* Profile Menu Popup */}
           {isProfileMenuOpen && (
-            <div className="absolute bottom-full left-4 right-4 mb-2 bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden z-50 animate-in zoom-in-95 duration-200 origin-bottom-left">
-              
-              {/* Header */}
-              <div className="p-4 border-b border-gray-100 flex items-center gap-3 cursor-pointer hover:bg-gray-50 transition-colors">
-                 <div className="w-10 h-10 rounded-lg bg-midnight text-white flex items-center justify-center">
+            <div className="absolute bottom-full left-4 right-4 mb-2 bg-slate-800 rounded-xl shadow-2xl border border-slate-700 overflow-hidden z-50 animate-in zoom-in-95 duration-200 origin-bottom-left">
+              <div className="p-4 border-b border-slate-700 flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center text-slate-200">
                    <User size={20} strokeWidth={2} />
                  </div>
                  <div className="flex-1">
-                   <h4 className="font-bold text-midnight leading-none">Traveler</h4>
-                   <span className="text-xs text-gray-500 font-medium">View profile</span>
+                   <h4 className="font-bold text-white text-sm">Traveler</h4>
+                   <span className="text-xs text-slate-400">Pro Account</span>
                  </div>
-                 <ChevronRight size={16} className="text-gray-400" />
               </div>
-
-              {/* Menu Items */}
               <div className="py-2">
-                 <button className="w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                    Account settings
-                 </button>
-                 <button className="w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                    Team Members
-                 </button>
-                 <button className="w-full text-left px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
-                    Billing & Invoices
-                 </button>
-              </div>
-
-              <div className="h-px bg-gray-100 mx-5 my-1"></div>
-
-              {/* Log in */}
-              <div className="py-2 pb-3">
-                 <button className="w-full text-left px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-gray-50 transition-colors">
-                    Log out
-                 </button>
+                 <button className="w-full text-left px-5 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">Settings</button>
+                 <button className="w-full text-left px-5 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">Billing</button>
+                 <button className="w-full text-left px-5 py-2 text-sm text-red-400 hover:bg-slate-700 hover:text-red-300 transition-colors">Log out</button>
               </div>
             </div>
           )}
 
           <div 
-            className={`flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg cursor-pointer transition-colors group relative ${isProfileMenuOpen ? 'bg-white/5' : ''}`}
+            className={`flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors group relative ${isProfileMenuOpen ? 'bg-slate-800' : ''}`}
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
           >
-            <div className="w-9 h-9 rounded-lg bg-gray-700 flex items-center justify-center text-gray-300 group-hover:text-white border border-gray-600">
+            <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 group-hover:text-white transition-colors">
               <User size={18} strokeWidth={2} />
             </div>
             <div className="flex-1">
-              <h4 className="text-sm font-semibold text-gray-200 group-hover:text-white">Traveler</h4>
+              <h4 className="text-sm font-semibold text-slate-200 group-hover:text-white">Traveler</h4>
             </div>
-            <MoreHorizontal size={16} className="text-gray-500 group-hover:text-white" />
+            <MoreHorizontal size={16} className="text-slate-500 group-hover:text-slate-300" />
           </div>
         </div>
       </aside>
@@ -276,7 +255,7 @@ export const Layout: React.FC<LayoutProps> = ({
       {/* Background Overlay */}
       {(isUpdatesOpen || isChatsOpen) && (
         <div 
-          className="fixed inset-0 bg-midnight/20 backdrop-blur-[1px] z-20 md:left-[280px]"
+          className="fixed inset-0 bg-slate-900/20 z-20 md:left-[280px]"
           onClick={() => {
               if (isUpdatesOpen) onToggleUpdates();
               if (isChatsOpen) onToggleChats();
@@ -285,7 +264,7 @@ export const Layout: React.FC<LayoutProps> = ({
       )}
       
       {/* Main Application Area */}
-      <main className="flex-1 h-full overflow-hidden relative bg-gray-50">
+      <main className="flex-1 h-full overflow-hidden relative bg-white rounded-l-2xl shadow-2xl md:my-2 md:mr-2 md:border md:border-gray-200 overflow-hidden">
         {children}
       </main>
     </div>
@@ -304,20 +283,18 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, badge, active, onClick }
   <button 
     onClick={onClick}
     className={`
-      w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group relative overflow-hidden
-      ${active ? 'bg-white/10 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}
+      w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group
+      ${active ? 'bg-slate-800 text-white shadow-sm border border-slate-700/50' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'}
     `}
   >
-    {active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-gold-500 rounded-r-full"></div>}
-    
-    <div className="flex items-center gap-3 pl-2">
-      <span className={`${active ? 'text-gold-500' : 'text-gray-500 group-hover:text-gray-300'}`}>
+    <div className="flex items-center gap-3">
+      <span className={`${active ? 'text-amber-400' : 'text-slate-500 group-hover:text-slate-300'}`}>
         {icon}
       </span>
-      <span className="text-sm font-medium tracking-wide">{label}</span>
+      <span className="text-sm font-medium">{label}</span>
     </div>
     {badge && (
-      <span className="min-w-[1.25rem] h-5 flex items-center justify-center bg-gold-500 text-midnight text-[10px] font-bold rounded-md px-1">
+      <span className={`w-5 h-5 flex items-center justify-center text-[10px] font-bold rounded-md ${active ? 'bg-amber-500 text-slate-900' : 'bg-slate-800 text-slate-500'}`}>
         {badge}
       </span>
     )}

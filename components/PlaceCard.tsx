@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PlaceDetails } from '../types';
 import { MapPin, Star, Plus, Check } from 'lucide-react';
@@ -27,48 +28,48 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ details, compact = false, 
   const bgImage = getReliableImage(details.category, details.name);
 
   return (
-    <div className={`group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-gray-300 ${compact ? 'flex h-20' : 'flex flex-col h-full'}`}>
+    <div className={`group bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-all duration-300 ${compact ? 'flex h-20' : 'flex flex-col h-full'}`}>
       <div 
-        className={`${compact ? 'w-20 h-full' : 'h-40'} bg-gray-100 bg-cover bg-center shrink-0 relative`}
+        className={`${compact ? 'w-20 h-full' : 'h-44'} bg-gray-100 bg-cover bg-center shrink-0 relative`}
         style={{ backgroundImage: `url(${bgImage})` }}
       >
         {!compact && (
-          <div className="absolute inset-0 bg-gradient-to-t from-midnight/60 to-transparent opacity-60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-70"></div>
         )}
         
         {/* Category Badge */}
         {!compact && details.category && (
-            <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm text-midnight text-[10px] uppercase font-bold px-2 py-0.5 rounded tracking-wide shadow-sm">
-                {details.category}
+            <span className="absolute bottom-3 left-3 text-white text-[10px] uppercase font-bold tracking-widest flex items-center gap-1">
+                <span className="w-1 h-1 bg-amber-400 rounded-full"></span> {details.category}
             </span>
         )}
       </div>
 
       <div className={`flex flex-col ${compact ? 'p-3 justify-center w-full' : 'p-5 flex-1'}`}>
         <div className="flex justify-between items-start gap-2">
-          <h4 className={`font-bold text-midnight leading-tight font-serif ${compact ? 'text-sm' : 'text-lg'}`}>{details.name}</h4>
+          <h4 className={`font-bold text-slate-900 leading-tight font-serif ${compact ? 'text-sm' : 'text-lg'}`}>{details.name}</h4>
           {details.priceLevel && (
-             <span className="text-[10px] font-bold text-gray-500 shrink-0 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200">{details.priceLevel}</span>
+             <span className="text-[10px] font-bold text-slate-500 shrink-0 bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">{details.priceLevel}</span>
           )}
         </div>
 
         {details.rating && (
           <div className="flex items-center mt-1.5 text-xs text-slate-500">
-            <Star size={12} fill="currentColor" className="text-gold-500 mr-1" />
-            <span className="font-bold text-midnight">{details.rating}</span>
+            <Star size={12} fill="currentColor" className="text-amber-500 mr-1" />
+            <span className="font-bold text-slate-800">{details.rating}</span>
             {details.user_ratings_total && (
-                 <span className="ml-1 text-gray-400">({details.user_ratings_total})</span>
+                 <span className="ml-1 text-slate-400">({details.user_ratings_total})</span>
             )}
           </div>
         )}
         
         {!compact && (
           <>
-            <p className="mt-3 text-sm text-gray-600 line-clamp-2 leading-relaxed font-normal">{details.description}</p>
+            <p className="mt-3 text-sm text-slate-600 line-clamp-2 leading-relaxed font-normal">{details.description}</p>
             
             <div className="mt-5 flex items-center justify-between pt-4 border-t border-gray-100">
                {details.address && (
-                <div className="flex items-center text-[11px] text-gray-400 max-w-[60%] font-medium">
+                <div className="flex items-center text-[11px] text-slate-400 max-w-[60%] font-medium">
                     <MapPin size={12} className="mr-1.5 shrink-0" />
                     <span className="truncate">{details.address}</span>
                 </div>
@@ -78,10 +79,10 @@ export const PlaceCard: React.FC<PlaceCardProps> = ({ details, compact = false, 
                  <button 
                     onClick={() => !isAdded && onAdd(details)}
                     disabled={isAdded}
-                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all ${
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded text-[10px] font-bold uppercase tracking-widest transition-all ${
                         isAdded 
-                        ? 'bg-gray-100 text-gray-400 cursor-default border border-gray-200'
-                        : 'bg-midnight text-white hover:bg-slate-800 hover:shadow-md border border-midnight'
+                        ? 'bg-gray-50 text-gray-400 cursor-default border border-gray-200'
+                        : 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm border border-slate-900'
                     }`}
                  >
                     {isAdded ? <Check size={12} /> : <Plus size={12} />}
