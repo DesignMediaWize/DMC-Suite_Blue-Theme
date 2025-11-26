@@ -1,0 +1,7 @@
+{
+  "name": "Copy of DMC Suite",
+  "description": "The next-generation AI workspace for Destination Management Companies and elite travel planners.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
