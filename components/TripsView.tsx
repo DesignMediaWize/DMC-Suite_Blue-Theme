@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { TripItinerary, Page } from '../types';
 import { Briefcase, Plus, Calendar, MapPin, ChevronDown, Check, X, Users, DollarSign, Clock, Sparkles, Plane } from 'lucide-react';
@@ -164,12 +165,12 @@ export const TripsView: React.FC<TripsViewProps> = ({ currentItinerary, onNaviga
       {/* Create Trip Modal */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center md:p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={onClose} // Backdrop click to close
         >
           <div 
             onClick={(e) => e.stopPropagation()} // Prevent close when clicking inside
-            className="bg-white rounded-[2rem] shadow-2xl w-full max-w-5xl h-[650px] overflow-hidden flex flex-col md:flex-row relative animate-in zoom-in-95 duration-300 ring-1 ring-white/50"
+            className="bg-white md:rounded-[2rem] shadow-2xl w-full max-w-5xl h-full md:h-[650px] overflow-hidden flex flex-col md:flex-row relative animate-in zoom-in-95 duration-300 ring-1 ring-white/50"
           >
             
             {/* Close Button - Updated for visibility on white background */}
@@ -202,7 +203,7 @@ export const TripsView: React.FC<TripsViewProps> = ({ currentItinerary, onNaviga
             </div>
 
             {/* Right Side: Form */}
-            <div className="flex-1 p-8 md:p-12 overflow-y-auto bg-white">
+            <div className="flex-1 p-8 md:p-12 overflow-y-auto bg-white pt-20 md:pt-12">
                <div className="max-w-md mx-auto h-full flex flex-col">
                    <div className="mb-8">
                      <h2 className="text-2xl font-bold text-slate-900 mb-1">Create a new trip</h2>

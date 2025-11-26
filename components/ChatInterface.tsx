@@ -62,16 +62,16 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             </div>
 
             {/* Hero Content */}
-            <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-12 pb-32 text-center">
-                 <div className="relative w-64 h-64 md:w-72 md:h-72 mb-10 group">
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-60 bg-white p-1.5 rounded-2xl shadow-2xl rotate-[-6deg] z-10 transition-transform duration-700 group-hover:rotate-[-8deg] group-hover:scale-105">
+            <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-12 pb-24 md:pb-32 text-center">
+                 <div className="relative w-56 h-56 md:w-72 md:h-72 mb-8 md:mb-10 group">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-52 md:w-48 md:h-60 bg-white p-1.5 rounded-2xl shadow-2xl rotate-[-6deg] z-10 transition-transform duration-700 group-hover:rotate-[-8deg] group-hover:scale-105">
                        <img 
                         src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=400" 
                         className="w-full h-full object-cover rounded-xl"
                         alt="Travel 1"
                        />
                     </div>
-                    <div className="absolute top-12 left-1/2 -translate-x-[15%] w-40 h-40 bg-white p-1.5 rounded-full shadow-xl z-20 transition-transform duration-700 group-hover:rotate-[5deg] group-hover:scale-105">
+                    <div className="absolute top-12 left-1/2 -translate-x-[15%] w-32 h-32 md:w-40 md:h-40 bg-white p-1.5 rounded-full shadow-xl z-20 transition-transform duration-700 group-hover:rotate-[5deg] group-hover:scale-105">
                        <img 
                         src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=400" 
                         className="w-full h-full object-cover rounded-full"
@@ -83,16 +83,16 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                     </div>
                  </div>
 
-                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight font-serif">
+                 <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight font-serif">
                     Where to today?
                  </h1>
-                 <p className="text-slate-500 text-lg max-w-md leading-relaxed font-medium">
+                 <p className="text-slate-500 text-base md:text-lg max-w-md leading-relaxed font-medium px-4">
                     Hey there, I’m here to assist you in planning your experience. Ask me anything travel related.
                  </p>
             </div>
 
             {/* Input Bar */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-20">
+            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-20 bg-gradient-to-t from-white via-white/90 to-transparent pb-6">
                 <div className="max-w-2xl mx-auto">
                      <div className="flex justify-center mb-4">
                          <button className="px-5 py-2 bg-white border border-gray-100 text-xs font-bold text-slate-600 rounded-full hover:bg-gray-50 transition-all shadow-sm hover:shadow-md">
@@ -113,13 +113,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Ask anything..."
-                                className="flex-1 bg-transparent border-none focus:ring-0 text-lg px-4 text-slate-900 placeholder-gray-400 font-medium"
+                                className="flex-1 bg-transparent border-none focus:ring-0 text-lg px-4 text-slate-900 placeholder-gray-400 font-medium min-w-0"
                                 disabled={isGenerating}
                              />
 
                              <div className="flex items-center gap-2">
                                 {!input && (
-                                     <button type="button" className="p-2 text-gray-400 hover:text-slate-900 transition-colors">
+                                     <button type="button" className="p-2 text-gray-400 hover:text-slate-900 transition-colors hidden sm:block">
                                         <Mic size={20} />
                                      </button>
                                 )}
@@ -241,7 +241,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition-all shadow-sm"
               >
                 <Briefcase size={14} />
-                <span>Create a trip</span>
+                <span className="hidden sm:inline">Create a trip</span>
               </button>
           </div>
       )}
@@ -338,13 +338,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Ask anything..."
-                            className="flex-1 bg-transparent border-none focus:ring-0 text-lg px-4 text-slate-900 placeholder-gray-400"
+                            className="flex-1 bg-transparent border-none focus:ring-0 text-lg px-4 text-slate-900 placeholder-gray-400 min-w-0"
                             disabled={isGenerating}
                          />
     
                          <div className="flex items-center gap-2">
                             {!input && (
-                                 <button type="button" className="p-2 text-gray-400 hover:text-slate-900 transition-colors">
+                                 <button type="button" className="p-2 text-gray-400 hover:text-slate-900 transition-colors hidden sm:block">
                                     <Mic size={20} />
                                  </button>
                             )}

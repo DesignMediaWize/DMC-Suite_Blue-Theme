@@ -309,10 +309,10 @@ export default function App() {
     const hasUserMessages = state.messages.some(m => m.role === 'user');
 
     return (
-      <>
+      <div className="flex flex-col h-full">
         {/* Mobile Header for Chat View - Only shown when active conversation */}
-        <div className="md:hidden h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 z-30 relative shrink-0">
-          <span className="font-bold text-gray-800">DMC Suite</span>
+        <div className="md:hidden h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 pl-16 z-30 relative shrink-0">
+          <span className="font-bold text-gray-800 font-serif">DMC Suite</span>
           {hasUserMessages && (
             <div className="flex gap-2">
               <button 
@@ -331,12 +331,12 @@ export default function App() {
           )}
         </div>
 
-        <div className="flex h-full relative overflow-hidden">
+        <div className="flex-1 relative overflow-hidden">
           {/* Chat Panel - Full width on Landing Page, Split on Conversation */}
           <div className={`
-            absolute md:relative z-10 h-full bg-white border-r border-gray-200 transition-all duration-300
+            absolute md:relative z-10 h-full w-full bg-white border-r border-gray-200 transition-all duration-300
             ${mobileTab === 'chat' ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-            ${hasUserMessages ? 'w-full md:w-[450px] lg:w-[500px]' : 'w-full'}
+            ${hasUserMessages ? 'md:w-[450px] lg:w-[500px]' : ''}
           `}>
             <ChatInterface 
               messages={state.messages} 
@@ -377,7 +377,7 @@ export default function App() {
             </div>
           )}
         </div>
-      </>
+      </div>
     );
   };
 
